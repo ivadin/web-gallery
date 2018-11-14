@@ -1,0 +1,70 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+/*<div class="row">*/
+    /*<div class="form-signin ">*/
+        /*<form method="POST" class="top-buffer input-group input-group-lg form-control" action="" enctype="multipart/form-data">*/
+            /*{% csrf_token %}*/
+            /*<h2 class=" text-center">Регистрация</h2>*/
+            /*{{ form }}*/
+            /*{{ form.errors }}*/
+            /*{#          {% for field in form %}#}*/
+            /*{##}*/
+            /*{#                <input class="form-control top-buffer-sm"#}*/
+            /*{#                       id="{{ field.id_for_label }}"#}*/
+            /*{#                       maxlength="512"#}*/
+            /*{#                       name="{{ field.html_name }}"#}*/
+            /*{#                       type="{{ field.html_name }}"#}*/
+            /*{#                       placeholder="{{ field.html_name }}"#}*/
+            /*{#                >#}*/
+            /*{##}*/
+            /*{##}*/
+            /*{#          {% endfor %}#}*/
+            /*{#            <input class="form-control"#}*/
+            /*{#                   name="password2"#}*/
+            /*{#                   id="id_password2"#}*/
+            /*{#                   maxlength="512"#}*/
+            /*{#                   type="password"#}*/
+            /*{#                   placeholder="confirm password"#}*/
+            /*{#            >#}*/
+          /*<input type='submit' class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">*/
+      /*</form>*/
+        /*<hr>*/
+    /*</div></div>*/

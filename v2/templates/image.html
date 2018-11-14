@@ -1,0 +1,81 @@
+{% extends 'basic.html' %}
+{% block  title_and_custom_styles%}
+    <title xmlns="http://www.w3.org/1999/html">Просмотр изображения</title>
+    <style>
+        .top-buffer {
+            margin-top: 15px;
+        }
+        .left-buffer{
+            margin-left: 15px;
+        }
+        button {
+            height: 50px;
+        }
+    </style>
+{% endblock %}
+
+{% block bootstrap_style %}
+    <link href="http://getbootstrap.ru/docs/3.3.7/examples/dashboard/dashboard.css" rel="stylesheet">
+{% endblock %}
+
+{% block home_page %}
+<div class="container-fluid">
+        <div class="col-sm-3 col-md-2 sidebar text-left">
+          <ul class="nav nav-sidebar container">
+            <li><a href="{% url 'gallery_url' %}">Галерея</a></li>
+            <li><a href="{% url 'add_image_url' %}">Добавить изображение</a></li>
+            <li class="active"><a href="">Просмотр изображения</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <br><br>
+          <div class="row">
+            <div class="col-sm-5 col-sm-offset-1 top-buffer img-boarder cell">
+                {% if  image.width_field > image.height_field %}
+                    <style>
+                        img {
+                            width: 500px;
+                            height: auto;
+                        }
+                    </style>
+                {% else %}
+                    <style>
+                        img {
+                            width: 300px;
+                            height: auto;
+                        }
+                    </style>
+                {% endif %}
+                <img src="{{ image.image.url }}" class="center-block img-rounded">
+                <br>
+                <form class="center fluid" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger"><h5>Удалить Изображение</h5></button>
+                </form>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1 img-boarder left-buffer cell">
+                <h2>Информация:</h2>
+                <h2 style="text-transform: capitalize">
+                    На изображении:
+                    <br>
+                    {{ image.title }}
+                </h2>
+                <h2>
+                    Дата загрузки:
+                    <br>
+                    {{ image.timestamp}}
+                </h2>
+                <h2 style="word-wrap:break-word">
+                    {% if image.description != ""%}
+                        Описание:
+                        <br>
+                        {{ image.description }}
+                    {% endif %}
+
+                </h2>
+            </div>
+          </div>
+        </div>
+</div>
+
+{% endblock %}

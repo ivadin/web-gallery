@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.ru/docs/3.3.7/favicon.ico">
+    {% block title_and_custom_styles %}{% endblock %}
+{#    <title>Home page</title>#}
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="http://getbootstrap.ru/docs/3.3.7/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    {% block bootstrap_style %}
+    {% endblock %}
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="http://getbootstrap.ru/docs/3.3.7/assets/js/ie-emulation-modes-warning.js"></script>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            {% if user.is_authenticated == True %}
+                <a class="navbar-brand" href="{% url 'gallery_url' %}">Домашняя страница</a>
+            {% else %}
+                <a class="navbar-brand" href="{% url 'home' %}">Домашняя страница</a>
+            {% endif %}
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <form method="POST" class="navbar-form navbar-right" action="">
+              {% csrf_token %}
+              {% if user.is_authenticated == False %}
+                  <div class="form-group">
+                    <input name="email" type="text" placeholder="Email" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <input name="password" type="password" placeholder="Password" class="form-control">
+                  </div>
+                  {% if login_error %}
+                      <button type="submit" class="btn btn-danger">Авторизация</button>
+                  {% else %}
+                      <button type="submit" class="btn btn-success">Авторизация</button>
+                  {% endif %}
+              {% else %}
+                  <a href="{% url 'logout_url' %}" class="btn btn-success">Выйти</a>
+              {% endif %}
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    {% block home_page %}{% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="http://getbootstrap.ru/docs/3.3.7/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.ru/docs/3.3.7/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

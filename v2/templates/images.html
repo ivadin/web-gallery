@@ -1,0 +1,106 @@
+{% extends 'basic.html' %}
+{% block  title_and_custom_styles%}
+    <title xmlns="http://www.w3.org/1999/html">Добро пожаловать</title>
+    <style>
+        img {
+            max-width:100%;
+            width: auto;
+            height: 165px;
+        }
+        .top-buffer {
+            margin-top: 15px;
+        }
+        input {
+            border: 1px solid #434343;
+            padding: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            width: 500px
+        }
+        footer{
+            min-height:100%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block bootstrap_style %}
+    <link href="http://getbootstrap.ru/docs/3.3.7/examples/dashboard/dashboard.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block home_page %}
+<div class="container-fluid text-center">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar text-left">
+          <ul class="nav nav-sidebar container">
+            <li class="active"><a href="">Галерея <span class="sr-only">(current)</span></a></li>
+            <li><a href="{% url 'add_image_url' %}">Добавить изображение</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+{#            <h2>Галерея</h2>#}
+            <form class="text-center" method="GET" action="">
+                <div class="input-group">
+                    <input type="text" name="query"
+                           class="form-control image-preview-filename"
+                           placeholder="Введите запрос" value="{{ request.GET.query }}">
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-default" value="Поиск" style="width: 100px">
+                    </span>
+                </div>
+            </form>
+            <div class="row ">
+            {% for image in image_db %}
+            <div class="col-xs-6 col-sm-3 top-buffer img-boarder cell ">
+             <a href="/gallery/{{ image.id }}">
+             <img src="{{ image.image.url }}" class="center-block img-rounded">
+             </a>
+{#             <h4 style="text-transform: capitalize">#}
+{#              {{ image.title }}#}
+{#             </h4>#}
+             <span class="text-muted center-block"> {{ image.timestamp }} </span>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+</div>
+    <footer>
+    <div class="pagination">
+        {% if image_db.paginator.num_pages != 1 %}
+        <span class="step-links">
+                    {% if image_db.has_previous %}
+                        <a href="?page=1
+                        {% if  request.GET.query %}
+                            &query={{ request.GET.query }}
+                        {% endif %}">&laquo; Первая</a>
+                        <a href="?page={{ image_db.previous_page_number }}
+                        {% if  request.GET.query %}
+                            &query={{ request.GET.query }}
+                        {% endif %}">Предыдущая</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Страница {{ image_db.number }} из {{ image_db.paginator.num_pages }}.
+                    </span>
+
+                    {% if image_db.has_next %}
+                        <a href="?page={{ image_db.next_page_number }}
+                        {% if  request.GET.query %}
+                            &query={{ request.GET.query }}
+                        {% endif %}">Следующая</a>
+                        <a href="?page={{ image_db.paginator.num_pages }}
+                        {% if  request.GET.query %}
+                            &query={{ request.GET.query }}
+                        {% endif %}">Последняя &raquo;</a>
+                    {% endif %}
+                </span>
+        {% endif     %}
+        </div>
+    </footer>
+{% endblock %}

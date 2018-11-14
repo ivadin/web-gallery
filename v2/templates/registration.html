@@ -1,0 +1,26 @@
+{% extends 'basic.html' %}
+
+{% block title_and_custom_styles %}
+    <title>Регистрация</title>
+    <style>
+        .top-buffer {
+            margin-top: 45%;
+        }
+    </style>
+{% endblock %}
+
+{% block bootstrap_style %}
+    <link href="http://getbootstrap.ru/docs/3.3.7/examples/signin/signin.css" rel="stylesheet">
+{% endblock %}
+
+{% block home_page %}
+    <div class="form-signin">
+        <form method="POST" class="top-buffer input-group input-group-lg form-control" action="" enctype="multipart/form-data">
+            <h2 class=" text-center">Регистрация</h2>
+            {% csrf_token %}
+            {{ form }}
+          <input type='submit' class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">
+        </form>
+        <hr>
+    </div>
+{% endblock %}

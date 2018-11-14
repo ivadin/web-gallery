@@ -1,0 +1,42 @@
+{% extends 'basic.html' %}
+{% block  title_and_custom_styles%}
+    <title>Добро пожаловать</title>
+{% endblock %}
+
+{% block bootstrap_style %}
+    <link href="http://getbootstrap.ru/docs/3.3.7/examples/jumbotron/jumbotron.css" rel="stylesheet">
+{% endblock %}
+
+{% block home_page %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Добро пожаловать!</h1>
+        <p>Храние свою галерею в одном месте.</p>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'registration_url' %}" role="button">Регистрация &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Шаг 1</h2>
+          <p>Зарегистрирутесь</p>
+{#          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
+        </div>
+        <div class="col-md-4">
+          <h2>Шаг 2</h2>
+          <p>Создайте свою галерею</p>
+{#          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
+       </div>
+        <div class="col-md-4">
+          <h2>Шаг 3</h2>
+          <p>Ищите нужные вам изображения</p>
+{#          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
+        </div>
+      </div>
+
+      <hr>
+    </div>
+{% endblock %}

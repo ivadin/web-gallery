@@ -1,0 +1,73 @@
+{% extends 'basic.html' %}
+{% load staticfiles %}
+{% block  title_and_custom_styles%}
+    <title xmlns="http://www.w3.org/1999/html">Добро пожаловать</title>
+
+    <style>
+        img{
+            position: center;
+        }
+
+        .top-buffer {
+            margin-top: 15px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block bootstrap_style %}
+    <link href="http://getbootstrap.ru/docs/3.3.7/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="/static/css/image_preview.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="{% static "js/prw.js" %}"></script>
+{% endblock %}
+
+{% block home_page %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar text-left">
+          <ul class="nav nav-sidebar container">
+            <li><a href="{% url 'gallery_url' %}">Галерея</a></li>
+            <li class="active"><a href="{% url 'add_image_url' %}">Добавить изображение<span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+
+        <div class="main">
+          <br><br>
+        </div>
+            <div class="center-block" style="width:800px">
+                <form method="POST" class="top-buffer" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row" >
+                       <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                        <!-- image-preview-filename input [CUT FROM HERE]-->
+                        <div class="input-group image-preview">
+                            <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                            <span class="input-group-btn">
+                                <!-- image-preview-clear button -->
+                                <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                    <span class="glyphicon glyphicon-remove"></span>Удалить
+                                </button>
+                                <!-- image-preview-input -->
+                                <div class="btn btn-default image-preview-input">
+                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                    <span class="image-preview-input-title">Выбрать</span>
+                                    {{ form.image }}
+                                </div>
+                            </span>
+                        </div>
+
+                    <h4>Добавить описание:</h4>
+                    {{ form.description }}
+                    <input type='submit' class="top-buffer block-center btn btn-lg btn-primary btn-block" value="Добавить"/>
+                    </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
